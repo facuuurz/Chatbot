@@ -81,7 +81,8 @@ class ActionCallApi(Action):
         params = {
             "latitude": lat,
             "longitude": lon,
-            "current_weather": "true"
+            "current": "temperature_2m,relative_humidity_2m,precipitation_probability,wind_speed_10m",
+            "timezone": "auto"
         }
         
         try:
@@ -89,12 +90,15 @@ class ActionCallApi(Action):
             
             if response.status_code == 200:
                 data = response.json()
-                current = data.get("current_weather", {})
-                temp = current.get("temperature", "N/A")
+                current = data.get("current", {})
+                temp = current.get("temperature_2m", "N/A")
+                hum_rel = current.get("relative_humidity_2m", "N/A")
+                prob_lluvia = current.get("precipitation_probability", "0") # a veces en current no da el pronostico justo, pero probamos
+                viento = current.get("wind_speed_10m", "N/A")
                 
                 texto_lugar = f"{ciudad_mostrada.title()} ({pais_mostrado})" if pais_mostrado else ciudad_mostrada.title()
                 dispatcher.utter_message(
-                    text=f"Conecté a la API exitosamente. El clima en {texto_lugar} actualmente es de {temp}°C."
+                    text=f"En {texto_lugar} la temperatura actual es de {temp}°C. La humedad es del {hum_rel}%, con vientos a {viento} km/h y una probabilidad de lluvia del {prob_lluvia}%."
                 )
             else:
                 dispatcher.utter_message(text="La API respondió, pero hubo un error en los datos.")
