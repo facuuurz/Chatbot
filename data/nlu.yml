@@ -1,91 +1,44 @@
 version: "3.1"
 
 nlu:
-- intent: greet
+- intent: ask_api_data
   examples: |
-    - hey
-    - hello
-    - hi
-    - hello there
-    - good morning
-    - good evening
-    - moin
-    - hey there
-    - let's go
-    - hey dude
-    - goodmorning
-    - goodevening
-    - good afternoon
+    - ¿Cuál es el clima en [Madrid](location)?
+    - dime los precios de hoy
+    - necesito información sobre el clima en [Kiev](location)
+    - ¿a cuánto está el precio?
+    - quiero consultar el clima
+    - muéstrame los precios actuales
+    - ¿qué clima hace hoy en [parana](location)?
 
-- intent: goodbye
+- intent: ask_future_weather
   examples: |
-    - cu
-    - good by
-    - cee you later
-    - good night
-    - bye
-    - goodbye
-    - have a nice day
-    - see you around
-    - bye bye
-    - see you later
+    - ¿cuando va a hacer calor en [Parana](location)?
+    - dime que dia hara calor
+    - ¿cuando va a hacer frio en [Madrid](location)?
+    - ¿que dia va a llover?
+    - ¿cuando llueve en [Oro Verde](location)?
+    - quiero saber cuando hara frio en [Kiev](location)
+    - cuando hará calor
 
-- intent: affirm
+- intent: chitchat
   examples: |
-    - yes
-    - y
-    - indeed
-    - of course
-    - that sounds good
-    - correct
+    - hola
+    - buenas
+    - ¿quién eres?
+    - ¿cómo estás?
+    - cuéntame un chiste
+    - jaja muy gracioso
+    - ¿qué tal todo?
+    - eres un robot
+    - ¿qué haces?
 
-- intent: deny
+- intent: exit_conversation
   examples: |
-    - no
-    - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
-
-- intent: mood_great
-  examples: |
-    - perfect
-    - great
-    - amazing
-    - feeling like a king
-    - wonderful
-    - I am feeling very good
-    - I am great
-    - I am amazing
-    - I am going to save the world
-    - super stoked
-    - extremely good
-    - so so perfect
-    - so good
-    - so perfect
-
-- intent: mood_unhappy
-  examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
-    - so sad
-
-- intent: bot_challenge
-  examples: |
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?
+    - salir
+    - adiós
+    - me quiero ir
+    - terminar
+    - chao
+    - finalizar
+    - sin entrada

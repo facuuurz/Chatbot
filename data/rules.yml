@@ -1,13 +1,24 @@
 version: "3.1"
 
 rules:
-
-- rule: Say goodbye anytime the user says goodbye
+- rule: Intercept and handle Chitchat
   steps:
-  - intent: goodbye
-  - action: utter_goodbye
+  - intent: chitchat
+  - action: utter_chitchat
+  # Inmediatamente redirige al flujo de la API para mantener el contexto
+  - action: utter_redirect_to_api
 
-- rule: Say 'I am a bot' anytime the user challenges
+- rule: API Flow
   steps:
-  - intent: bot_challenge
-  - action: utter_iamabot
+  - intent: ask_api_data
+  - action: action_call_api
+
+- rule: Goodbye or No-Input handle (Exit)
+  steps:
+  - intent: exit_conversation
+  - action: action_session_start
+
+- rule: Interactive Predictive Weather
+  steps:
+  - intent: ask_future_weather
+  - action: action_future_weather
