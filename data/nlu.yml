@@ -4,12 +4,17 @@ nlu:
 - intent: ask_api_data
   examples: |
     - ¿Cuál es el clima en [Madrid](location)?
-    - dime los precios de hoy
     - necesito información sobre el clima en [Kiev](location)
-    - ¿a cuánto está el precio?
     - quiero consultar el clima
-    - muéstrame los precios actuales
     - ¿qué clima hace hoy en [parana](location)?
+    - clima actual
+    - que temperatura hay en [kyiv](location)
+    - que temperatura hay
+    - cual es la temperatura
+    - que probabilidad de lluvia hay
+    - probabilidad de lluvia
+    - cómo está el clima
+    - decime la temperatura
 
 - intent: ask_future_weather
   examples: |
@@ -20,20 +25,20 @@ nlu:
     - ¿cuando llueve en [Oro Verde](location)?
     - quiero saber cuando hara frio en [Kiev](location)
     - cuando hará calor
+    - pronóstico
+    - lloverá mañana?
+    - va a llover?
 
-- intent: chitchat
+- intent: greet
   examples: |
     - hola
     - buenas
-    - ¿quién eres?
-    - ¿cómo estás?
-    - cuéntame un chiste
-    - jaja muy gracioso
-    - ¿qué tal todo?
-    - eres un robot
-    - ¿qué haces?
+    - hello
+    - qué tal
+    - buenos días
+    - buenas tardes
 
-- intent: exit_conversation
+- intent: goodbye
   examples: |
     - salir
     - adiós
@@ -41,4 +46,21 @@ nlu:
     - terminar
     - chao
     - finalizar
-    - sin entrada
+    - bye
+
+- intent: thanks
+  examples: |
+    - gracias
+    - muchas gracias
+    - te lo agradezco
+    - perfecto gracias
+
+- intent: chitchat
+  examples: |
+    - ¿quién eres?
+    - ¿cómo estás?
+    - cuéntame un chiste
+    - jaja muy gracioso
+    - ¿qué tal todo?
+    - eres un robot
+    - ¿qué haces?

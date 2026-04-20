@@ -22,14 +22,20 @@ class ActionCallApi(Action):
         # Si la red neuronal falla en extraer la entidad, hacemos un rescate manual del texto
         if not location_entity:
             texto_usuario = tracker.latest_message.get("text", "")
-            for separador in [" de ", " en "]:
+            for separador in [" en ", " de "]:
                 if separador in texto_usuario:
                     # Extraer lo que está después del " de " o " en "
-                    location_entity = texto_usuario.split(separador)[-1].strip("¿? ")
-                    break
+                    posible_lugar = texto_usuario.split(separador)[-1].strip("¿? ")
+                    # Prevenir falsos positivos comunes
+                    if not any(palabra in posible_lugar.lower() for palabra in ["lluvia", "calor", "frio", "frío", "clima", "hoy", "mañana"]):
+                        location_entity = posible_lugar
+                        break
         
+        uso_por_defecto = False
         # Si todo falló, usamos nuestro lugar por defecto
-        location_entity = location_entity or "Oro Verde"
+        if not location_entity:
+            location_entity = "Oro Verde"
+            uso_por_defecto = True
         
         # 1. Separamos ciudad y país si el usuario usó una coma (ej: "La Paz, Bolivia")
         ciudad_busqueda = location_entity
@@ -97,8 +103,21 @@ class ActionCallApi(Action):
                 viento = current.get("wind_speed_10m", "N/A")
                 
                 texto_lugar = f"{ciudad_mostrada.title()} ({pais_mostrado})" if pais_mostrado else ciudad_mostrada.title()
+                
+                # Agregando consejos interactivos
+                consejo = ""
+                if temp != "N/A" and temp > 27:
+                    consejo = " 👕 Hace bastante calor, ponte ropa fresca."
+                elif temp != "N/A" and temp < 15:
+                    consejo = " 🧥 Está fresco/frío, ¡no olvides abrigarte!"
+                
+                if prob_lluvia != "N/A" and int(prob_lluvia) > 40:
+                    consejo += " ☔ Además, hay altas chances de lluvia, te sugiero llevar paraguas."
+                    
+                aviso_defecto = "\n*(💡 Como no especificaste una ciudad, busqué en Oro Verde)*" if uso_por_defecto else ""
+
                 dispatcher.utter_message(
-                    text=f"En {texto_lugar} la temperatura actual es de {temp}°C. La humedad es del {hum_rel}%, con vientos a {viento} km/h y una probabilidad de lluvia del {prob_lluvia}%."
+                    text=f"En {texto_lugar} la temperatura actual es de {temp}°C. La humedad es del {hum_rel}%, con vientos a {viento} km/h y una probabilidad de lluvia del {prob_lluvia}%.{consejo}{aviso_defecto}"
                 )
             else:
                 dispatcher.utter_message(text="La API respondió, pero hubo un error en los datos.")
@@ -135,10 +154,13 @@ class ActionFutureWeather(Action):
         texto_usuario = tracker.latest_message.get("text", "").lower()
         
         if not location_entity:
-            for separador in [" de ", " en "]:
+            for separador in [" en ", " de "]:
                 if separador in texto_usuario:
-                    location_entity = texto_usuario.split(separador)[-1].strip("¿? ")
-                    break
+                    posible_lugar = texto_usuario.split(separador)[-1].strip("¿? ")
+                    # Prevenir falsos positivos comunes
+                    if not any(palabra in posible_lugar.lower() for palabra in ["lluvia", "calor", "frio", "frío", "clima", "hoy", "mañana"]):
+                        location_entity = posible_lugar
+                        break
         location_entity = location_entity or "Oro Verde"
         
         ciudad_busqueda = location_entity

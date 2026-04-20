@@ -4,7 +4,9 @@ intents:
   - ask_api_data
   - ask_future_weather
   - chitchat
-  - exit_conversation
+  - greet
+  - goodbye
+  - thanks
 
 entities:
   - location
@@ -15,11 +17,22 @@ actions:
   - action_session_start
 
 responses:
+  utter_greet:
+  - text: "¡Hola! Soy tu asistente meteorológico. ¿En qué te puedo ayudar hoy?"
+    buttons:
+      - title: "Ver Clima Actual"
+        payload: "/ask_api_data"
+      - title: "Consultar Pronóstico"
+        payload: "/ask_future_weather"
+
+  utter_goodbye:
+  - text: "¡Hasta luego! Que tengas un excelente día."
+
+  utter_welcome:
+  - text: "¡De nada! Estoy aquí para ayudarte."
+
   utter_chitchat:
-  - text: "Soy un asistente experto y mi propósito es responder de forma directa."
-  
-  utter_redirect_to_api:
-  - text: "Por favor, volvamos al tema central. ¿Qué información te gustaría consultar? (ej. clima o precios)"
+  - text: "Soy un asistente experto y mi propósito es darte información del clima."
 
 session_config:
   session_expiration_time: 60

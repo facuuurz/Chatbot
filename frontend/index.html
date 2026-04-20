@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asistente Meteorológico</title>
+    <!-- Google Fonts for Modern Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Unicons for Icons -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-animation">
+        <!-- Animated Blobs for Glassmorphism Context -->
+        <div class="blob shape1"></div>
+        <div class="blob shape2"></div>
+        <div class="blob shape3"></div>
+    </div>
+
+    <div class="chat-wrapper">
+        <header class="chat-header">
+            <div class="chatbot-info">
+                <div class="avatar">
+                    <i class="uil uil-cloud-sun-rain"></i>
+                </div>
+                <div class="info-text">
+                    <h1>MeteoBot</h1>
+                    <span class="status"><span class="dot"></span> Online</span>
+                </div>
+            </div>
+            <button class="settings-btn" id="theme-toggle">
+                <i class="uil uil-moon"></i>
+            </button>
+        </header>
+
+        <main class="chat-history" id="chat-history">
+            <!-- Messages will be injected here -->
+        </main>
+
+        <div class="chat-input-container">
+            <!-- Botones interactivos permanentes -->
+            <div class="sticky-buttons" id="sticky-buttons"></div>
+            
+            <div class="input-glass">
+                <input type="text" id="user-input" placeholder="Escribe un mensaje..." autocomplete="off">
+                <button id="send-btn">
+                    <i class="uil uil-message"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
