@@ -1,0 +1,39 @@
+# .gitignore para proyectos Rasa
+# ============================================================
+
+# Entorno virtual de Python (no subir al repositorio)
+venv/
+env/
+.env/
+
+# Modelos entrenados (pueden ser muy pesados, >500MB)
+models/
+
+# Caché de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Logs de Rasa
+*.log
+logs/
+
+# Archivos de resultados de Rasa
+results/
+graph.html
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Rasa NLU training output
+nlu_comparison_results/
+
+# Rasa internal cache
+.rasa/

@@ -1,0 +1,77 @@
+# domain.yml
+# ============================================================
+# Bot de exploración espacial NASA.
+# Dos funciones principales:
+#   1. APOD — Foto astronómica del día
+#   2. Asteroides — Objetos cercanos a la Tierra (NeoWs)
+# ============================================================
+
+version: "3.1"
+
+# ── INTENTS ─────────────────────────────────────────────────
+intents:
+  - greet             # Saludo inicial
+  - goodbye           # Despedida
+  - ask_apod          # Pide la foto del día de la NASA
+  - ask_asteroids     # Pide info de asteroides cercanos a la Tierra
+  - bot_challenge     # "¿Eres un bot?"
+  - chit_chat         # Mensajes off-topic
+  - out_of_scope      # Mensajes completamente fuera del contexto
+  - nlu_fallback      # Mensaje incomprensible (baja confianza NLU)
+
+# ── ENTIDADES ────────────────────────────────────────────────
+entities: []
+
+# ── SLOTS ────────────────────────────────────────────────────
+slots:
+  no_input_count:
+    type: float
+    influence_conversation: false
+    mappings:
+      - type: custom   # Manejado por action_handle_no_input
+
+# ── RESPONSES ────────────────────────────────────────────────
+responses:
+
+  utter_greet:
+    - text: "🚀 Bienvenido al Centro de Control Cósmico.\nPodés pedirme la **foto del día de la NASA** (APOD) o ver los **asteroides** que pasan cerca de la Tierra hoy."
+    - text: "🛰️ Conexión establecida con el observatorio. ¿Qué querés explorar?\n• *Foto del día* — la imagen astronómica que la NASA eligió hoy\n• *Asteroides* — objetos cercanos a la Tierra en este momento"
+
+  utter_goodbye:
+    - text: "🚀 Hasta la próxima. El universo va a seguir expandiéndose igual sin vos, pero igual fue un gusto. 🌌"
+    - text: "👨‍🚀 Misión finalizada. Volvé cuando quieras explorar el cosmos. 🛸"
+
+  utter_iamabot:
+    - text: "¿Un bot? Técnicamente sí. Soy una interfaz de texto conectada a las APIs de la NASA. No tengo conciencia, pero sé más de asteroides que vos. 🤖🪐"
+
+  utter_chit_chat:
+    - text: "Interesante, pero eso no está en mi base de datos espaciales. 😒\n¿Querés la **foto del día** de la NASA o datos de **asteroides cercanos**?"
+    - text: "El cosmos no tiene tiempo para eso. ¿Foto astronómica o asteroides? 🔭"
+    - text: "Mmm. El control de misión no me entrenó para eso. Probá con: *'foto del día'* o *'asteroides de hoy'*. 🚀"
+
+  utter_out_of_scope:
+    - text: "Ese dato no está en ninguna base de datos de la NASA. Solo manejo **APOD** y **asteroides cercanos**. ¿Cuál querés? 🛰️"
+    - text: "Fuera del rango de mi radar espacial. 📡 Podés preguntarme por la foto del día o los asteroides que pasan hoy."
+
+  utter_fallback:
+    - text: "🌀 Señal no identificada. Probá con: *'foto del día'* o *'asteroides de hoy'*."
+    - text: "📡 El receptor no decodificó eso. ¿Foto del día de la NASA o asteroides cercanos?"
+
+  utter_no_input_warning:
+    - text: "📡 ¿Seguís ahí? El control de misión espera tu instrucción."
+    - text: "🛰️ Silencio en la frecuencia... ¿Todo bien? Escribí algo para continuar."
+
+  utter_session_end_no_input:
+    - text: "🚀 Sin respuesta del operador. Cerrando canal de comunicación. ¡Hasta la próxima!"
+    - text: "📡 Conexión terminada por inactividad. Volvé cuando quieras explorar el cosmos. 🌌"
+
+# ── ACTIONS ──────────────────────────────────────────────────
+actions:
+  - action_get_apod         # NASA APOD — Foto astronómica del día
+  - action_get_asteroids    # NASA NeoWs — Asteroides cercanos a la Tierra
+  - action_handle_no_input  # Maneja silencio o mensajes incomprensibles
+
+# ── SESSION CONFIG ────────────────────────────────────────────
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: false

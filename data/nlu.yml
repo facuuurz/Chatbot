@@ -1,0 +1,144 @@
+# data/nlu.yml
+# ============================================================
+# Datos de entrenamiento NLU — Bot NASA.
+# Intents para exploración espacial: APOD y Asteroides.
+# ============================================================
+
+version: "3.1"
+
+nlu:
+
+# ── INTENT: greet ────────────────────────────────────────────
+- intent: greet
+  examples: |
+    - hola
+    - buenas
+    - buenos días
+    - buenas tardes
+    - hey
+    - hola nasa
+    - hola bot
+    - buen día
+    - cómo estás
+    - qué tal
+    - saludos
+    - hi
+    - buenas noches
+    - qué onda
+
+# ── INTENT: goodbye ──────────────────────────────────────────
+- intent: goodbye
+  examples: |
+    - adiós
+    - hasta luego
+    - chao
+    - chau
+    - me voy
+    - bye
+    - hasta pronto
+    - nos vemos
+    - me despido
+    - gracias, chau
+    - hasta la próxima
+    - que te vaya bien
+    - cerrar
+    - salir
+
+# ── INTENT: ask_apod ─────────────────────────────────────────
+- intent: ask_apod
+  examples: |
+    - foto del día
+    - imagen del día
+    - foto de la nasa
+    - imagen de la nasa
+    - qué foto tiene hoy la nasa
+    - muéstrame la foto del día
+    - qué imagen eligió la nasa hoy
+    - foto astronómica
+    - imagen astronómica del día
+    - apod
+    - qué vio el telescopio hoy
+    - foto espacial
+    - imagen del cosmos
+    - qué foto puso la nasa hoy
+    - quiero ver la foto del día
+    - mostrame la imagen de hoy
+    - foto del universo
+    - imagen del universo
+    - qué tiene la nasa hoy
+    - dime la foto del día
+
+# ── INTENT: ask_asteroids ────────────────────────────────────
+- intent: ask_asteroids
+  examples: |
+    - asteroides
+    - hay asteroides cerca
+    - qué asteroides hay hoy
+    - objetos cercanos a la tierra
+    - neo
+    - neos
+    - hay algo cerca de la tierra
+    - qué pasa en el espacio hoy
+    - asteroides cercanos
+    - hay algún asteroide peligroso
+    - cuántos asteroides hay hoy
+    - qué objetos pasan cerca
+    - info de asteroides
+    - datos de asteroides
+    - asteroides de hoy
+    - qué hay cerca de la tierra
+    - objetos espaciales cercanos
+    - monitoreo de asteroides
+    - radar de asteroides
+    - hay peligro espacial hoy
+
+# ── INTENT: bot_challenge ────────────────────────────────────
+- intent: bot_challenge
+  examples: |
+    - ¿eres un bot?
+    - ¿eres una máquina?
+    - ¿eres humano?
+    - ¿con quién hablo?
+    - ¿qué eres?
+    - ¿eres real?
+    - eres un programa
+    - estás programado
+    - ¿eres de verdad?
+    - ¿eres inteligencia artificial?
+
+# ── INTENT: chit_chat ────────────────────────────────────────
+- intent: chit_chat
+  examples: |
+    - estoy aburrido
+    - contame algo
+    - qué hora es
+    - qué día es hoy
+    - cuántos años tenés
+    - cuál es tu nombre
+    - de qué me podés hablar
+    - qué podés hacer
+    - qué sabés
+    - ayudame
+    - necesito ayuda
+    - no sé qué pedir
+    - qué opciones tengo
+    - háblame de algo
+    - tengo una pregunta
+
+# ── INTENT: out_of_scope ─────────────────────────────────────
+- intent: out_of_scope
+  examples: |
+    - cuánto es 2 + 2
+    - dame una receta de cocina
+    - qué película me recomiendas
+    - cuál es la capital de Francia
+    - ayúdame con mi tarea de matemática
+    - puedes traducir este texto
+    - busca algo en google
+    - qué temperatura hace afuera
+    - poneme música
+    - cuál es el precio del dólar
+    - quién ganó el partido
+    - dame el horóscopo
+    - quiero mi horóscopo
+    - tirá el tarot

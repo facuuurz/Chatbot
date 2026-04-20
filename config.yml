@@ -1,0 +1,63 @@
+# config.yml
+# ============================================================
+# Pipeline de procesamiento NLU y políticas del modelo Rasa.
+# Configurado para español con clasificación de intents robusta.
+# ============================================================
+
+recipe: default.v1
+
+language: es  # Idioma: español
+
+pipeline:
+  # Tokeniza el texto separando por espacios
+- name: WhitespaceTokenizer
+
+  # Extrae features usando expresiones regulares definidas en domain
+- name: RegexFeaturizer
+
+  # Features léxico-sintácticas (posición, mayúsculas, signos, etc.)
+- name: LexicalSyntacticFeaturizer
+
+  # Bag-of-words a nivel de palabras
+- name: CountVectorsFeaturizer
+
+  # Bag-of-words a nivel de caracteres (mejor para errores ortográficos)
+- name: CountVectorsFeaturizer
+  analyzer: char_wb
+  min_ngram: 1
+  max_ngram: 4
+
+  # DIET: clasificador principal de intents y extractor de entidades
+- name: DIETClassifier
+  epochs: 150
+  constrain_similarities: true
+
+  # Mapea sinónimos de entidades (ej: "escorpión" → "scorpio")
+- name: EntitySynonymMapper
+
+  # ResponseSelector: para intents de chit-chat con respuestas variables
+- name: ResponseSelector
+  epochs: 100
+  constrain_similarities: true
+
+  # FallbackClassifier: activa cuando la confianza es baja
+- name: FallbackClassifier
+  threshold: 0.65         # Si el intent tiene menos del 65% de confianza
+  ambiguity_threshold: 0.10
+
+policies:
+  # MemoizationPolicy: recuerda historias exactas del entrenamiento
+- name: MemoizationPolicy
+
+  # RulePolicy: ejecuta reglas deterministas (chit-chat, no-input, saludos)
+- name: RulePolicy
+  core_fallback_threshold: 0.30
+  core_fallback_action_name: "action_default_fallback"
+  enable_fallback_prediction: true
+
+  # TEDPolicy: modelo de diálogo basado en transformers para flujos complejos
+- name: TEDPolicy
+  max_history: 6
+  epochs: 150
+  constrain_similarities: true
+assistant_id: 20260420-163022-light-frieze

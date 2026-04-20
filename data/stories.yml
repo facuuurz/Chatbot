@@ -1,0 +1,85 @@
+# data/stories.yml
+# ============================================================
+# Historias de conversación — Bot NASA.
+# Flujos multi-turno que TEDPolicy aprende.
+# ============================================================
+
+version: "3.1"
+
+stories:
+
+# ── FLUJO: saludo → foto del día ─────────────────────────────
+- story: Saludo y pide foto del día
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: ask_apod
+    - action: action_get_apod
+
+# ── FLUJO: saludo → asteroides ───────────────────────────────
+- story: Saludo y pide asteroides
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: ask_asteroids
+    - action: action_get_asteroids
+
+# ── FLUJO: foto del día directo ──────────────────────────────
+- story: Pide foto del día directamente
+  steps:
+    - intent: ask_apod
+    - action: action_get_apod
+    - intent: goodbye
+    - action: utter_goodbye
+
+# ── FLUJO: asteroides directo ────────────────────────────────
+- story: Pide asteroides directamente
+  steps:
+    - intent: ask_asteroids
+    - action: action_get_asteroids
+    - intent: goodbye
+    - action: utter_goodbye
+
+# ── FLUJO: ambas consultas en la misma sesión ────────────────
+- story: Foto del día y luego asteroides
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: ask_apod
+    - action: action_get_apod
+    - intent: ask_asteroids
+    - action: action_get_asteroids
+    - intent: goodbye
+    - action: utter_goodbye
+
+# ── FLUJO: asteroides y luego foto ───────────────────────────
+- story: Asteroides y luego foto del día
+  steps:
+    - intent: ask_asteroids
+    - action: action_get_asteroids
+    - intent: ask_apod
+    - action: action_get_apod
+
+# ── FLUJO: chit-chat → redirigir ─────────────────────────────
+- story: Chit-chat y luego pide foto
+  steps:
+    - intent: chit_chat
+    - action: utter_chit_chat
+    - intent: ask_apod
+    - action: action_get_apod
+
+# ── FLUJO: chit-chat → asteroides ───────────────────────────
+- story: Chit-chat y luego pide asteroides
+  steps:
+    - intent: chit_chat
+    - action: utter_chit_chat
+    - intent: ask_asteroids
+    - action: action_get_asteroids
+
+# ── FLUJO: bot challenge y continúa ──────────────────────────
+- story: Pregunta si es bot y luego consulta
+  steps:
+    - intent: bot_challenge
+    - action: utter_iamabot
+    - intent: ask_apod
+    - action: action_get_apod

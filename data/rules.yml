@@ -1,0 +1,49 @@
+# data/rules.yml
+# ============================================================
+# Reglas DETERMINISTAS — Bot NASA.
+# Se activan siempre sin importar el contexto anterior.
+# ============================================================
+
+version: "3.1"
+
+rules:
+
+# ── REGLA 1: Saludo ──────────────────────────────────────────
+- rule: Responder saludo
+  steps:
+    - intent: greet
+    - action: utter_greet
+
+# ── REGLA 2: Despedida ───────────────────────────────────────
+- rule: Responder despedida
+  steps:
+    - intent: goodbye
+    - action: utter_goodbye
+
+# ── REGLA 3: Bot challenge ───────────────────────────────────
+- rule: El usuario pregunta si soy un bot
+  steps:
+    - intent: bot_challenge
+    - action: utter_iamabot
+
+# ── REGLA 4: Chit-chat ───────────────────────────────────────
+- rule: Manejar chit-chat con redirección espacial
+  steps:
+    - intent: chit_chat
+    - action: utter_chit_chat
+
+# ── REGLA 5: Out of scope ────────────────────────────────────
+- rule: Manejar mensajes fuera del tema
+  steps:
+    - intent: out_of_scope
+    - action: utter_out_of_scope
+
+# ── REGLA 6: Fallback + No-Input (Requisito 2 del TP) ────────
+# Maneja baja confianza del NLU y mensajes vacíos.
+# action_handle_no_input decide internamente:
+#   - Texto incomprensible → respuesta de fallback espacial
+#   - Mensaje vacío        → aviso / cierre de sesión
+- rule: Manejar no-input y fallback del usuario
+  steps:
+    - intent: nlu_fallback
+    - action: action_handle_no_input

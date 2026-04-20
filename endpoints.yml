@@ -1,0 +1,9 @@
+# endpoints.yml
+# ============================================================
+# Define los endpoints que Rasa usa para comunicarse con
+# el servidor de acciones personalizadas (actions.py).
+# El servidor se levanta con: rasa run actions
+# ============================================================
+
+action_endpoint:
+  url: "http://localhost:5055/webhook"
